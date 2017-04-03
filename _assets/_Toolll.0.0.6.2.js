@@ -1,9 +1,9 @@
 $(document).ready(function(){window.noconsole={off:!0,error:function(){},group:function(){},groupCollapsed:function(){},groupEnd:function(){},log:function(){}};typeof console!="object"&&(console=noconsole);_toolll=new _Toolll;_toolll.init();window.loadMap=_toolll.ext.googlemap.loadMap});
 function _Toolll(){var c=this;c.scrll=$.browser.webkit?$("body"):$("html, body");c.label=$("meta[name=label]").attr("content")*1;if(c.label)_Toolll.prototype.labelmenu=new LabelMenu;_Toolll.prototype.ext=new _Ext;_Toolll.prototype.core=new _Core;_Toolll.prototype.init=function(){this.events();this.proportionate();$(window).resize(function(){c.proportionate()});var a=navigator.userAgent.toLowerCase();c.iphone=a.match(/(iphone|ipod)/);c.ipad=a.match(/(ipad)/);c.items=[];c.domitems=$(".item");$(c.domitems).each(function(b,
-a){var d=$(a),f;f=d.attr("rel").replace(RegExp("'","g"),'"');var h={json:JSON.parse(f),dom:d};d.data("item",h);if(d.hasClass("text"))c.linkHover(d);else if(d.hasClass("image")){f=d.find(".inneritem > img");var j=window.devicePixelRatio>1?f.data("px")+"@2x":f.data("px"),l=f.attr("data-iid"),i=f.data("ext");f.attr({src:"/_image/"+l+"_"+j+i})}else d.hasClass("youtube")?d.bind("click",function(){c.ext.youtube.init(d)}):d.hasClass("vimeo")?_toolll.iphone&&window.devicePixelRatio<2?d.find(".inneritem > img").remove():
+a){var d=$(a),f;f=d.attr("rel").replace(RegExp("'","g"),'"');var h={json:JSON.parse(f),dom:d};d.data("item",h);if(d.hasClass("text"))c.linkHover(d);else if(d.hasClass("image")){f=d.find(".inneritem > img");var j=window.devicePixelRatio>1?f.data("px")+"":f.data("px"),l=f.attr("data-iid"),i=f.data("ext");f.attr({src:"/_image/"+l+"_"+j+i})}else d.hasClass("youtube")?d.bind("click",function(){c.ext.youtube.init(d)}):d.hasClass("vimeo")?_toolll.iphone&&window.devicePixelRatio<2?d.find(".inneritem > img").remove():
 _toolll.ipad||_toolll.iphone?d.find(".inneritem > img").mouseover(function(){$(this).css({display:"none"})}):d.find(".inneritem > .custom-load").bind("click",function(){c.ext.vimeo.init(h)}):d.hasClass("gmap")&&c.ext.googlemap.init(d);c.items.push(h)});c.core.zoom.init(c.items);c.label&&this.labelmenu.init();if(window.location.hash)setTimeout(function(){var b=$(window.location.hash);b.length&&c.scrll.animate({scrollTop:b.offset().top-15},200,"",function(){})},100),window.onhashchange=function(){if(window.location.hash==
 ""||window.location.hash=="#")return!1}};_Toolll.prototype.proportionate=function(a){c.setBlockHeight(a)};_Toolll.prototype.setBlockHeight=function(a){a?(c.blocksize=a,c.oblocksize=$("#toolll").attr("rel")*1):$("#toolll").attr("rel")?c.blocksize=$("#toolll").attr("rel")*1:(a=$(window).width(),c.blocksize=a<524?262:a<1E3?524:1E3);c.fontsize=c.blocksize*100/1E3;c.roundedleftmargin=Math.round(($(window).width()-c.blocksize)/2);if(c.roundedleftmargin<0)c.roundedleftmargin=0;$("#render").text($("#render").text()+
-"body{\t\t\t\tbackground-image:"+$("body").css("background-image").replace("_1","_0")+";\t\t\t\tfont-size: "+c.fontsize+"%;\t\t\t}");a=$("#inner").css("padding-bottom").replace(/px/,"");$("#inner").css({minHeight:$(window).innerHeight()-a});$("#inner, #footer").width(c.blocksize)};_Toolll.prototype.imageRes=function(){var a=typeof Toolll=="undefined"?"":"_0";$("#items > .image > .inneritem > img").each(function(){var b=dom.find(".inneritem > img"),a=window.devicePixelRatio>1?b.data("px")+"@2x":b.data("px"),
+"body{\t\t\t\tbackground-image:"+$("body").css("background-image").replace("_1","_0")+";\t\t\t\tfont-size: "+c.fontsize+"%;\t\t\t}");a=$("#inner").css("padding-bottom").replace(/px/,"");$("#inner").css({minHeight:$(window).innerHeight()-a});$("#inner, #footer").width(c.blocksize)};_Toolll.prototype.imageRes=function(){var a=typeof Toolll=="undefined"?"":"_0";$("#items > .image > .inneritem > img").each(function(){var b=dom.find(".inneritem > img"),a=window.devicePixelRatio>1?b.data("px")+"":b.data("px"),
 c=b.attr("data-iid"),f=b.data("ext");b.attr({src:"/_image/"+c+"_"+a+f})});$("#header > .image > .inneritem > img").each(function(){var b=$(this).attr("src").replace(/_.*[0-9]/,"_0");$(this).attr({src:b})});$("#items > .image > .inneritem > img").each(function(){$(this).data("px");$(this).data("iid");var b=$(this).attr("src").replace(/_.*[0-9]/,a);$(this).attr({src:b})});$("#footer > .image > .inneritem > img").each(function(){var b=$(this).attr("src").replace(/_.*[0-9]/,"_0");$(this).attr({src:b})})};
 _Toolll.prototype.events=function(){window.onpopstate=c.changeState};_Toolll.prototype.changeState=function(a){(a=a.state)&&a.item&&c.core.zoom.zoom($("#"+a.item).data("item"))};_Toolll.prototype.linkHover=function(a){var b=noconsole;b.groupCollapsed("_Toolll.linkHover()");if(!a)return!1;a=a[0].tagName.match(/^a/i)?a:a.find("a");$(a).each(function(a,d){var f=!1;$(this).attr("rel")&&(f="{"+$(this).attr("rel").replace(/\'/g,'"').replace(/(\{|\})/g,"")+"}",f=JSON.parse(f));b.log("HOVER STYLES",f);var h=
 {};if($(this).attr("class")&&$(this).attr("class").match(/_\d*/)){var j=$(this).attr("class").match(/_\d*/)[0];b.log("cn",j);var l=userdata.classes[j]}$.each(f,function(a){var c=a.replace(/([A-Z])/g,function(b){return"-"+b.toLowerCase()}),c=RegExp(c+":"),e=$(d).attr("style")&&$(d).attr("style").match()?!0:!1,f=$(d).css(a);b.log("keypat","-"+c+"-");b.log("$(a).attr('style')",$(d).attr("style"));b.log("inlinekeyisset",e);b.log("style",f);f&&e&&(h[a]=f);l&&l.css[a]&&(h[a]=l.css[a]);h[a]||(h[a]="")});
@@ -197,7 +197,7 @@ for(var i=0; i<self.properties.length; i++) {
 	var property = self.properties[i],
 		camelCased = StyleFix.camelCase(property),
 		PrefixCamelCased = self.prefixProperty(property, true);
-	
+
 	$.cssProps[camelCased] = PrefixCamelCased;
 }
 })(window.jQuery, window.PrefixFree);
@@ -212,30 +212,30 @@ for(var i=0; i<self.properties.length; i++) {
  */
 // (function ($) {
 //     var hammerEvents = ['hold','tap','doubletap','transformstart','transform','transformend','dragstart','drag','dragend','swipe','release'];
-// 
+//
 //     $.each(hammerEvents, function(i, event) {
-// 
+//
 //         $.event.special[event] = {
-// 
+//
 //             setup: function(data, namespaces, eventHandle) {
 //                 var $target = $(this),
 //                     hammer;
-// 
+//
 //                 if (!$target.hammer) {
 //                     $target.data('hammerjs', new Hammer(this, data));
 //                 }
-// 
+//
 //                 hammer = $target.data('hammerjs');
-// 
+//
 //                 hammer['on'+ event] = function (ev) {
 //                     $target.trigger($.Event(event, ev));
 //                 };
 //             },
-// 
+//
 //             teardown: function(namespaces) {
 //                 var $target = $(this),
 //                     hammer = $target.data('hammerjs');
-// 
+//
 //                 if(hammer && hammer['on'+ event]) {
 //                     delete hammer['on'+ event];
 //                 }
@@ -859,7 +859,7 @@ function Hammer(element, options, undefined)
 
                 _mousedown = false;
                 _event_end = event;
-                
+
                 var dragging = _gesture == 'drag';
 
                 // swipe gesture
